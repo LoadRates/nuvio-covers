@@ -39,7 +39,7 @@ jobs:
       - name: Commit updated backdrops
         id: publish
         run: |
-          if git diff --quiet -- backdrops/; then
+          if ! git status --porcelain -- backdrops/ | grep -q .; then
             echo "No changes to backdrop files."
             echo "changed=false" >> "$GITHUB_OUTPUT"
             exit 0
