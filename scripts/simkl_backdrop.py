@@ -44,7 +44,7 @@ from backdrop import (
 SIMKL_API = "https://api.simkl.com"
 TMDB_API = "https://api.themoviedb.org/3"
 SIMKL_CONTENT_TYPES = ("shows", "anime")
-OUTPUT_SIZE = "1080p"
+OUTPUT_SIZE = "4k"
 MAX_ITEMS = 60
 TMDB_RATE_DELAY = 0.25
 
