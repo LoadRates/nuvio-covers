@@ -64,8 +64,13 @@ jobs:
 
       - name: Purge jsDelivr cache
         if: steps.publish.outputs.changed == 'true'
+        continue-on-error: true
         run: |
-          curl -sf "https://purge.jsdelivr.net/gh/LoadRates/nuvio-covers@main/backdrops/watchlist.webp"
-          curl -sf "https://purge.jsdelivr.net/gh/LoadRates/nuvio-covers@main/backdrops/plantowatch.webp"
-          curl -sf "https://purge.jsdelivr.net/gh/LoadRates/nuvio-covers@main/videos/watchlist.mp4"
-          curl -sf "https://purge.jsdelivr.net/gh/LoadRates/nuvio-covers@main/videos/plantowatch.mp4"
+          for url in \
+            "https://purge.jsdelivr.net/gh/LoadRates/nuvio-covers@main/backdrops/watchlist.webp" \
+            "https://purge.jsdelivr.net/gh/LoadRates/nuvio-covers@main/backdrops/plantowatch.webp" \
+            "https://purge.jsdelivr.net/gh/LoadRates/nuvio-covers@main/videos/watchlist.mp4" \
+            "https://purge.jsdelivr.net/gh/LoadRates/nuvio-covers@main/videos/plantowatch.mp4"; do
+            curl -s "$url" || true
+            sleep 2
+          done
